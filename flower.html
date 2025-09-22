@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flor Amarilla para ti</title>
+<style>
+/* Reset y variables */
+* { padding: 0; margin: 0; box-sizing: border-box; }
+:root {
+  --color-bg: linear-gradient(to top, #000011, #0a0a2a);
+  --line-color: linear-gradient(to left top, #82ff86 20%, #144425, #104e1c);
+  --flower-center: radial-gradient(circle, #000, #ff5e00);
+  --leaf-color: radial-gradient(circle, #82ff86, #104e1c);
+  --petal-color: radial-gradient(circle, #ff5e00, #ffbb00);
+}
+
+body {
+  background-image: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  position: relative; /* Para luciernagas y estrellas */
+  font-family: "Poppins", sans-serif;
+}
+
+/* Título */
+h1 {
+  position: absolute;
+  top: 20px;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-weight: 300;
+  font-size: 28px;
+  z-index: 10;
+}
+
+/* Bloque de letras sincronizadas */
+.lyrics-container {
+  position: absolute;
+  top: 120px;
+  width: 100%;
+  text-align: center;
+  font-size: 28px; /* más grande */
+  color: #fff;
+  line-height: 1.6;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10;
+}
+.lyrics-line {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: absolute;
+}
+.lyrics-line.active {
+  opacity: 1;
+  font-size: 36px; /* más grande */
+  font-weight: bold;
+  text-shadow: 0 0 16px rgba(255, 255, 150, 0.9);
+}
+
+/* Flor amarilla */
+.flower_wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+.flower_stem { width: 20px; height: 400px; background-image: var(--line-color); border-radius: 20px; }
+.flower_center { position: absolute; top: -93px; left: 50%; transform: translateX(-50%); width: 150px; height: 150px; border-radius: 50%; background: var(--flower-center); z-index: 5; opacity: 0; animation: open-flower-center 1s ease-out forwards; animation-delay: 1s; }
+.flower_petal { position: absolute; width: 70px; height: 140px; background: var(--petal-color); clip-path: ellipse(35% 50% at 50% 50%); top: -40%; left: 50%; transform-origin: center bottom; opacity: 0; animation: open-flower-petal 1s ease-out forwards; }
+.flower_petal-1 { --rotate-deg: 0deg; animation-delay: 1.2s; }
+.flower_petal-2 { --rotate-deg: 30deg; animation-delay: 1.25s; }
+.flower_petal-3 { --rotate-deg: 60deg; animation-delay: 1.3s; }
+.flower_petal-4 { --rotate-deg: 90deg; animation-delay: 1.35s; }
+.flower_petal-5 { --rotate-deg: 120deg; animation-delay: 1.4s; }
+.flower_petal-6 { --rotate-deg: 150deg; animation-delay: 1.45s; }
+.flower_petal-7 { --rotate-deg: 180deg; animation-delay: 1.5s; }
+.flower_petal-8 { --rotate-deg: 210deg; animation-delay: 1.55s; }
+.flower_petal-9 { --rotate-deg: 240deg; animation-delay: 1.6s; }
+.flower_petal-10 { --rotate-deg: 270deg; animation-delay: 1.65s; }
+.flower_petal-11 { --rotate-deg: 300deg; animation-delay: 1.7s; }
+.flower_petal-12 { --rotate-deg: 330deg; animation-delay: 1.75s; }
+.flower_leaf { position: absolute; width: 70px; height: 120px; background: var(--leaf-color); border-radius: 100px 20px 100px 20px; transform-origin: center bottom; }
+.flower_leaf-1 { left: 60%; bottom: 150px; transform: translateX(-45%) rotate(80deg); }
+.flower_leaf-2 { left: 60%; bottom: 200px; transform: translateX(-55%) rotate(-80deg); }
+@keyframes open-flower-petal { 0% { transform: translateX(-50%) translateY(50px) rotate(0deg); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(-50%) translateY(0) rotate(var(--rotate-deg)); opacity: 1; } }
+@keyframes open-flower-center { 0% { transform: translateX(-50%) scale(0); opacity: 0; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
+
+/* Botón */
+.flower-btn { padding: 15px 30px; font-size: 18px; font-weight: 600; color: #fff; background: linear-gradient(45deg, #ffbb00, #ff5e00); border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 8px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 10; margin: 40px 0; }
+.flower-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(0,0,0,0.4); }
+
+/* Luciernagas */
+.firefly {
+  position: absolute;
+  bottom: 0;
+  width: 6px; height: 6px;
+  background: radial-gradient(circle, #ffff66, #ffdd00);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: flyUp 5s linear infinite;
+}
+@keyframes flyUp {
+  0% { transform: translateX(0px) translateY(0px); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateX(var(--x)) translateY(-50vh); opacity: 1; }
+  100% { transform: translateX(var(--x)) translateY(-100vh); opacity: 0; }
+}
+
+/* Estrellas */
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle {
+  0% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+  100% { opacity: 0.2; transform: scale(1); }
+}
+</style>
+</head>
+<body>
+
+<audio id="id_audio" src="digital-love.mp3"></audio>
+
+<h1>Feliz 21, ten tu flor amarilla :3</h1>
+
+<!-- Contenedor de letras -->
+<div class="lyrics-container" id="lyrics"></div>
+
+<!-- Flor -->
+<div class="flower_wrapper">
+  <div class="flower_stem"></div>
+  <div class="flower_center"></div>
+  <div class="flower_petal flower_petal-1"></div>
+  <div class="flower_petal flower_petal-2"></div>
+  <div class="flower_petal flower_petal-3"></div>
+  <div class="flower_petal flower_petal-4"></div>
+  <div class="flower_petal flower_petal-5"></div>
+  <div class="flower_petal flower_petal-6"></div>
+  <div class="flower_petal flower_petal-7"></div>
+  <div class="flower_petal flower_petal-8"></div>
+  <div class="flower_petal flower_petal-9"></div>
+  <div class="flower_petal flower_petal-10"></div>
+  <div class="flower_petal flower_petal-11"></div>
+  <div class="flower_petal flower_petal-12"></div>
+  <div class="flower_leaf flower_leaf-1"></div>
+  <div class="flower_leaf flower_leaf-2"></div>
+</div>
+
+<!-- Luciernagas -->
+<div class="firefly" style="--x: 20px; animation-delay: 0s;"></div>
+<div class="firefly" style="--x: -30px; animation-delay: 1s;"></div>
+<div class="firefly" style="--x: 50px; animation-delay: 2s;"></div>
+<div class="firefly" style="--x: -50px; animation-delay: 3s;"></div>
+<div class="firefly" style="--x: 10px; animation-delay: 4s;"></div>
+
+<!-- Botón -->
+<button class="flower-btn">CLICK AQUI</button>
+
+<script>
+// Crear letras
+const floweBtn = document.querySelector(".flower-btn");
+const audio = document.getElementById("id_audio");
+const lyricsContainer = document.getElementById("lyrics");
+const lyrics = [
+  { time: 23, text: "Last night I had a dream about you" },
+  { time: 27, text: "In this dream, I'm dancing right beside you" },
+  { time: 31, text: "And it looked like everyone was having fun" },
+  { time: 35, text: "The kind of feeling I've waited so long" },
+  { time: 39, text: "Don't stop, come a little closer" },
+  { time: 43, text: "As we jam, the rhythm gets stronger" },
+  { time: 47, text: "There's nothing wrong with just a little, little fun" },
+  { time: 51, text: "We were dancing all night long" },
+  { time: 55, text: "The time is right to put my arms around you" },
+  { time: 58, text: "You're feeling right" },
+  { time: 60, text: "You wrap your arms around too" },
+  { time: 62, text: "But suddenly, I feel the shining sun" },
+  { time: 67, text: "Before I knew it, this dream was all gone" },
+  { time: 72, text: "Ooh, I don't know what to do" },
+  { time: 76, text: "About this dream and you" },
+  { time: 80, text: "I wish this dream comes true" },
+  { time: 87, text: "Ooh, I don't know what to do" },
+  { time: 91, text: "About this dream and you" },
+  { time: 96, text: "We'll make this dream come true" },
+  { time: 100, text: "Que no hablemos no significa" },
+  { time: 102, text: "que no me preocupe por ti" },
+  { time: 104, text: "espero este pequeño regalo" },
+  { time: 106, text: "te alegre el día" },
+  { time: 108, text: "TKM ♡" },
+  { time: 196, text: "Why don't you play the game?" },
+  { time: 210, text: "gei el que lea esto" }
+];
+
+lyrics.forEach((line, i)=>{
+  const div = document.createElement("div");
+  div.className = "lyrics-line";
+  div.id = "line-"+i;
+  div.textContent = line.text;
+  lyricsContainer.appendChild(div);
+});
+
+// Botón reproducción audio + letras
+floweBtn.onclick = ()=>{
+  audio.play();
+  audio.volume = 0.5;
+  setInterval(()=>{
+    const currentTime = Math.floor(audio.currentTime);
+    lyrics.forEach((line,i)=>{
+      const el = document.getElementById("line-"+i);
+      if(currentTime>=line.time && (i===lyrics.length-1 || currentTime<lyrics[i+1].time)){
+        el.classList.add("active");
+      } else {
+        el.classList.remove("active");
+      }
+    });
+  },500);
+};
+
+// Crear estrellas al azar
+const starCount = 100;
+for(let i=0;i<starCount;i++){
+  const star = document.createElement("div");
+  star.className="star";
+  star.style.left = Math.random()*100+"%";
+  star.style.top = Math.random()*80+"%";
+  star.style.width = star.style.height = Math.random()*2+1+"px";
+  star.style.animationDuration = (Math.random()*3+1)+"s";
+  star.style.animationDelay = Math.random()*5+"s";
+  document.body.appendChild(star);
+}
+</script>
+</body>
+</html>
