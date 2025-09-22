@@ -22,32 +22,32 @@ body {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  position: relative; /* Para luciernagas y estrellas */
+  position: relative;
   font-family: "Poppins", sans-serif;
 }
 
 /* Título */
 h1 {
   position: absolute;
-  top: 20px;
+  top: 10px;
   text-align: center;
-  width: 100%;
+  width: 90%;
   color: #fff;
   font-weight: 300;
-  font-size: 28px;
+  font-size: 4vw; /* responsive */
   z-index: 10;
 }
 
-/* Bloque de letras sincronizadas */
+/* Contenedor letras */
 .lyrics-container {
   position: absolute;
-  top: 120px;
-  width: 100%;
+  top: 15%;
+  width: 90%;
+  max-height: 25%;
   text-align: center;
-  font-size: 28px; /* más grande */
+  font-size: 4vw; /* responsive */
   color: #fff;
-  line-height: 1.6;
-  height: 120px;
+  line-height: 1.5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,25 +58,28 @@ h1 {
   opacity: 0;
   transition: opacity 0.5s ease;
   position: absolute;
+  word-wrap: break-word;
 }
 .lyrics-line.active {
   opacity: 1;
-  font-size: 36px; /* más grande */
+  font-size: 6vw; /* aumenta letra activada */
   font-weight: bold;
   text-shadow: 0 0 16px rgba(255, 255, 150, 0.9);
 }
 
-/* Flor amarilla */
+/* Flor */
 .flower_wrapper {
   position: absolute;
   left: 50%;
-  bottom: 20px;
+  bottom: 5%;
   transform: translateX(-50%);
   z-index: 5;
+  width: 120px;
+  height: 400px;
 }
-.flower_stem { width: 20px; height: 400px; background-image: var(--line-color); border-radius: 20px; }
-.flower_center { position: absolute; top: -93px; left: 50%; transform: translateX(-50%); width: 150px; height: 150px; border-radius: 50%; background: var(--flower-center); z-index: 5; opacity: 0; animation: open-flower-center 1s ease-out forwards; animation-delay: 1s; }
-.flower_petal { position: absolute; width: 70px; height: 140px; background: var(--petal-color); clip-path: ellipse(35% 50% at 50% 50%); top: -40%; left: 50%; transform-origin: center bottom; opacity: 0; animation: open-flower-petal 1s ease-out forwards; }
+.flower_stem { width: 10px; height: 100%; background-image: var(--line-color); border-radius: 20px; }
+.flower_center { position: absolute; top: -38%; left: 50%; transform: translateX(-50%); width: 40%; aspect-ratio: 1/1; border-radius: 50%; background: var(--flower-center); z-index: 5; opacity: 0; animation: open-flower-center 1s ease-out forwards; animation-delay: 1s; }
+.flower_petal { position: absolute; width: 20%; height: 40%; background: var(--petal-color); clip-path: ellipse(50% 50% at 50% 50%); top: -20%; left: 50%; transform-origin: center bottom; opacity: 0; animation: open-flower-petal 1s ease-out forwards; }
 .flower_petal-1 { --rotate-deg: 0deg; animation-delay: 1.2s; }
 .flower_petal-2 { --rotate-deg: 30deg; animation-delay: 1.25s; }
 .flower_petal-3 { --rotate-deg: 60deg; animation-delay: 1.3s; }
@@ -89,14 +92,15 @@ h1 {
 .flower_petal-10 { --rotate-deg: 270deg; animation-delay: 1.65s; }
 .flower_petal-11 { --rotate-deg: 300deg; animation-delay: 1.7s; }
 .flower_petal-12 { --rotate-deg: 330deg; animation-delay: 1.75s; }
-.flower_leaf { position: absolute; width: 70px; height: 120px; background: var(--leaf-color); border-radius: 100px 20px 100px 20px; transform-origin: center bottom; }
-.flower_leaf-1 { left: 60%; bottom: 150px; transform: translateX(-45%) rotate(80deg); }
-.flower_leaf-2 { left: 60%; bottom: 200px; transform: translateX(-55%) rotate(-80deg); }
-@keyframes open-flower-petal { 0% { transform: translateX(-50%) translateY(50px) rotate(0deg); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(-50%) translateY(0) rotate(var(--rotate-deg)); opacity: 1; } }
+.flower_leaf { position: absolute; width: 25%; height: 30%; background: var(--leaf-color); border-radius: 100px 20px 100px 20px; transform-origin: center bottom; }
+.flower_leaf-1 { left: 60%; bottom: 40%; transform: translateX(-45%) rotate(80deg); }
+.flower_leaf-2 { left: 60%; bottom: 55%; transform: translateX(-55%) rotate(-80deg); }
+
+@keyframes open-flower-petal { 0% { transform: translateX(-50%) translateY(20px) rotate(0deg); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(-50%) translateY(0) rotate(var(--rotate-deg)); opacity: 1; } }
 @keyframes open-flower-center { 0% { transform: translateX(-50%) scale(0); opacity: 0; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
 
 /* Botón */
-.flower-btn { padding: 15px 30px; font-size: 18px; font-weight: 600; color: #fff; background: linear-gradient(45deg, #ffbb00, #ff5e00); border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 8px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 10; margin: 40px 0; }
+.flower-btn { padding: 12px 25px; font-size: 4vw; font-weight: 600; color: #fff; background: linear-gradient(45deg, #ffbb00, #ff5e00); border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 8px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 10; margin: 10px 0; }
 .flower-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(0,0,0,0.4); }
 
 /* Luciernagas */
@@ -130,13 +134,26 @@ h1 {
   50% { opacity: 1; transform: scale(1.5); }
   100% { opacity: 0.2; transform: scale(1); }
 }
+
+/* Media queries para móviles */
+@media(max-width: 600px){
+  h1 { font-size: 5vw; }
+  .lyrics-container { font-size: 5vw; max-height: 30%; top: 12%; }
+  .lyrics-line.active { font-size: 8vw; }
+  .flower_wrapper { width: 80px; height: 250px; bottom: 3%; }
+  .flower_stem { width: 8px; }
+  .flower_center { width: 50%; top: -40%; }
+  .flower_petal { width: 20%; height: 35%; }
+  .flower_leaf { width: 20%; height: 25%; }
+  .flower-btn { font-size: 5vw; padding: 10px 20px; }
+}
 </style>
 </head>
 <body>
 
 <audio id="id_audio" src="digital-love.mp3"></audio>
 
-<h1>Feliz 21, ten tu flor amarilla :3</h1>
+<h1>Que no hablemos no significa que no me preocupe, toma esta lindo flor aunq sea virtual</h1>
 
 <!-- Contenedor de letras -->
 <div class="lyrics-container" id="lyrics"></div>
@@ -196,13 +213,8 @@ const lyrics = [
   { time: 87, text: "Ooh, I don't know what to do" },
   { time: 91, text: "About this dream and you" },
   { time: 96, text: "We'll make this dream come true" },
-  { time: 100, text: "Que no hablemos no significa" },
-  { time: 102, text: "que no me preocupe por ti" },
-  { time: 104, text: "espero este pequeño regalo" },
-  { time: 106, text: "te alegre el día" },
-  { time: 108, text: "TKM ♡" },
   { time: 196, text: "Why don't you play the game?" },
-  { time: 210, text: "gei el que lea esto" }
+  { time: 197, text: "Why don't you play the game?" }
 ];
 
 lyrics.forEach((line, i)=>{
@@ -245,3 +257,5 @@ for(let i=0;i<starCount;i++){
 </script>
 </body>
 </html>
+
+
